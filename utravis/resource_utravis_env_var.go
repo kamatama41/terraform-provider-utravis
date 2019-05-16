@@ -2,6 +2,8 @@ package utravis
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/base64"
 	"time"
 
 	"github.com/hashicorp/terraform/helper/schema"
@@ -28,6 +30,9 @@ func resourceTravisEnvVar() *schema.Resource {
 				Type:      schema.TypeString,
 				Required:  true,
 				Sensitive: true,
+				StateFunc: func(value interface{}) string {
+					return hashString(value.(string))
+				},
 			},
 			"public": {
 				Type:     schema.TypeBool,
@@ -82,7 +87,7 @@ func resourceEnvVarRead(d *schema.ResourceData, meta interface{}) error {
 	d.Set("name", *envVar.Name)
 	if envVar.Value != nil {
 		// Value returns nil if the env var is private
-		d.Set("value", *envVar.Value)
+		d.Set("value", hashString(*envVar.Value))
 	}
 	d.Set("public", *envVar.Public)
 
@@ -117,4 +122,9 @@ func resourceEnvVarDelete(d *schema.ResourceData, meta interface{}) error {
 	}
 	d.SetId("")
 	return nil
+}
+
+func hashString(str string) string {
+	hash := sha256.Sum256([]byte(str))
+	return base64.StdEncoding.EncodeToString(hash[:])
 }
