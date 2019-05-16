@@ -9,6 +9,7 @@ fi
 
 git config --global user.email "shiketaudonko41@gmail.com"
 git config --global user.name "kamatama41"
+git fetch origin
 git checkout master
 git reset --hard origin/master
 
