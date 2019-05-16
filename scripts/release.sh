@@ -10,7 +10,7 @@ fi
 git config --global user.email "shiketaudonko41@gmail.com"
 git config --global user.name "kamatama41"
 git remote -v
-git remote add kamatama41 git@github.com:kamatama41/terraform-provider-unofficial-travis.git
+git remote add kamatama41 https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/kamatama41/terraform-provider-unofficial-travis.git
 git fetch kamatama41
 git checkout -b master kamatama41/master
 
