@@ -9,9 +9,10 @@ fi
 
 git config --global user.email "shiketaudonko41@gmail.com"
 git config --global user.name "kamatama41"
-git fetch origin
-git checkout master
-git reset --hard origin/master
+git remote -v
+git remote add kamatama41 git@github.com:kamatama41/terraform-provider-unofficial-travis.git
+git fetch kamatama41
+git checkout -b master kamatama41/master
 
 PROJECT_ROOT=$(cd $(dirname $0)/..; pwd)
 VERSION_FILE=${PROJECT_ROOT}/version
@@ -63,4 +64,4 @@ echo ${NEXT_VERSION} > ${VERSION_FILE}
 echo "## Bump up the version to ${NEXT_VERSION}"
 git add ${VERSION_FILE}
 git commit -m "Bump up to the next version"
-git push origin master
+git push kamatama41 master
