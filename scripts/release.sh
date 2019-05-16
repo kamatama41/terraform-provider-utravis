@@ -61,4 +61,5 @@ echo ${NEXT_VERSION} > ${VERSION_FILE}
 
 echo "## Bump up the version to ${NEXT_VERSION}"
 git add ${VERSION_FILE}
-git commit -m "Bump up "
+git commit -m "Bump up to the next version"
+git push origin master
