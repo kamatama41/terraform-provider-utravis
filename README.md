@@ -3,12 +3,12 @@
 A Terraform provider to interact with [Travis CI](https://travis-ci.com/) resources.
 
 ## Prerequisites
-- Terraform (tested on 0.11.3)
+- Terraform (tested on 0.11.13)
 
 ## Installation
 This is a [Third party plugin](https://www.terraform.io/docs/configuration/providers.html#third-party-plugins), so you have to install it manually.
 
-Download plugin from GitHub releases and unarchive it. That's it!
+Download plugin from GitHub releases and unarchive it. That's all!
 ```sh
 $ latest=$(curl -s https://api.github.com/repos/kamatama41/terraform-provider-unofficial-travis/releases/latest | jq -r ".name")
 $ os=$(uname | tr '[:upper:]' '[:lower:]')
@@ -16,9 +16,11 @@ $ curl -LO https://github.com/kamatama41/terraform-provider-unofficial-travis/re
 $ unzip terraform-provider-utravis_${latest}_${os}_amd64.zip && rm terraform-provider-utravis_${latest}_${os}_amd64.zip
 ```
 
-(Optional) If you want to use the plugin for other Terraform projects, place it to `~/.terraform.d/plugins` (`%APPDATA%\terraform.d\plugins` for Windows users)
+(Optional) If you want to use the plugin for other Terraform projects, place the binary into `~/.terraform.d/plugins` (`%APPDATA%\terraform.d\plugins` for Windows users)
 
 ## Configuration
+`base_url` and `token` are required. You can use the environment variable `TRAVIS_BASE_URL` and `TRAVIS_API_TOKEN` instead of them.
+
 ```hcl
 # Configure the unofficial Travis Provider (utravis)
 provider "utravis" {
@@ -34,3 +36,6 @@ resource "utravis_env_var" "my-repo" {
   public = true
 }
 ```
+
+## Supported resources
+- `utravis_env_var`: https://developer.travis-ci.com/resource/env_vars#Env%20vars
