@@ -2,9 +2,6 @@ package utravis
 
 import (
 	"context"
-	"crypto/sha256"
-	"encoding/base64"
-	"time"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/shuheiktgw/go-travis"
@@ -124,9 +121,4 @@ func resourceEnvVarDelete(d *schema.ResourceData, meta interface{}) error {
 	}
 	d.SetId("")
 	return nil
-}
-
-func hashString(str string) string {
-	hash := sha256.Sum256([]byte(str))
-	return base64.StdEncoding.EncodeToString(hash[:])
 }
