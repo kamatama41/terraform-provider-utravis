@@ -21,10 +21,12 @@ func resourceTravisEnvVar() *schema.Resource {
 			"slug": {
 				Type:     schema.TypeString,
 				Required: true,
+				ForceNew: true,
 			},
 			"name": {
 				Type:     schema.TypeString,
 				Required: true,
+				ForceNew: true,
 			},
 			"value": {
 				Type:      schema.TypeString,
@@ -38,6 +40,7 @@ func resourceTravisEnvVar() *schema.Resource {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  false,
+				ForceNew: true,
 			},
 		},
 	}
@@ -64,7 +67,6 @@ func resourceEnvVarCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	d.SetId(*envVar.Id)
-	time.Sleep(1 * time.Second)
 	return resourceEnvVarRead(d, meta)
 }
 
