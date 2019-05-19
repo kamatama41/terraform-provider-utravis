@@ -25,7 +25,8 @@ func Provider() terraform.ResourceProvider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"utravis_env_var": resourceTravisEnvVar(),
+			"utravis_env_var":  resourceTravisEnvVar(),
+			"utravis_key_pair": resourceTravisKeyPair(),
 		},
 	}
 	p.ConfigureFunc = providerConfigure(p)

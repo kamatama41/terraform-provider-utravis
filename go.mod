@@ -7,7 +7,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/hashicorp/terraform v0.11.13
 	github.com/mattn/go-isatty v0.0.7 // indirect
-	github.com/shuheiktgw/go-travis v0.2.0
+	github.com/shuheiktgw/go-travis v0.2.1
 	github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 // indirect
 	github.com/voxelbrain/goptions v0.0.0-20180630082107-58cddc247ea2 // indirect
 	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529 // indirect

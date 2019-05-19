@@ -35,7 +35,14 @@ resource "utravis_env_var" "my-repo" {
   value = "bar"
   public = true
 }
+
+# Add a private key to the repository
+resource "utravis_key_pair" "my-repo" {
+  slug = "myuser/my-repository"
+	value = "${file("~/.ssh/id_travis_rsa")}"
+}
 ```
 
 ## Supported resources
-- `utravis_env_var`: https://developer.travis-ci.com/resource/env_vars#Env%20vars
+- `utravis_env_var`: https://developer.travis-ci.com/resource/env_var
+- `utravis_key_pair`: https://developer.travis-ci.com/resource/key_pair
