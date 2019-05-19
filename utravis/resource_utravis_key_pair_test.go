@@ -12,6 +12,8 @@ import (
 )
 
 func TestAccTravisKeyPair_basic(t *testing.T) {
+	t.Skip("The resource is available on Travis CI Enterprise. I don't have the Enterprise account for CI testing so far.")
+
 	var keyPair travis.KeyPair
 	description := "Test"
 	updatedDescription := "Test - updated"
