@@ -39,7 +39,7 @@ resource "utravis_env_var" "my-repo" {
 # Add a private key to the repository
 resource "utravis_key_pair" "my-repo" {
   slug = "myuser/my-repository"
-	value = "${file("~/.ssh/id_travis_rsa")}"
+  value = "${file("~/.ssh/id_travis_rsa")}"
 }
 ```
 
