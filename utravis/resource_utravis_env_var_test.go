@@ -19,8 +19,8 @@ func TestAccTravisEnvVar_basic(t *testing.T) {
 	updatedName := fmt.Sprintf("KEY_updated_%s", randString)
 	value := "val"
 	updatedValue := "val - updated"
-	public := true
-	updatedPublic := false
+	public := false
+	updatedPublic := true
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
@@ -44,7 +44,7 @@ func TestAccTravisEnvVar_basic(t *testing.T) {
 				Config: testAccTravisEnvVarUpdateConfig(updatedName),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckTravisEnvVarExists("utravis_env_var.foo", &envVar),
-					testAccCheckTravisEnvVarAttributes(&envVar, updatedName, updatedValue, false),
+					testAccCheckTravisEnvVarAttributes(&envVar, updatedName, updatedValue, updatedPublic),
 					resource.TestCheckResourceAttr("utravis_env_var.foo", "slug", testSlug),
 					resource.TestCheckResourceAttr("utravis_env_var.foo", "name", updatedName),
 					resource.TestCheckResourceAttr("utravis_env_var.foo", "value", hashString(updatedValue)),
@@ -131,7 +131,7 @@ resource "utravis_env_var" "foo" {
     slug = "%s"
 	name = "%s"
 	value = "val"
-	public = true
+	public = false
 }
 `, testSlug, name)
 }
@@ -142,7 +142,7 @@ resource "utravis_env_var" "foo" {
     slug = "%s"
 	name = "%s"
 	value = "val - updated"
-	public = false
+	public = true
 }
 `, testSlug, updatedName)
 }
