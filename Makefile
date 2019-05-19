@@ -1,3 +1,6 @@
+NAME := terraform-provider-unofficial-travis
+VERSION?=$$(cat version)
+
 default: test
 
 test: fmtcheck
@@ -5,6 +8,9 @@ test: fmtcheck
 
 testacc: fmtcheck
 	TF_ACC=1 go test -v ./...
+
+build:
+	go build -o terraform-provider-utravis_$(VERSION)_x4
 
 release:
 	./scripts/release.sh
@@ -24,4 +30,4 @@ fmt:
 fmtcheck:
 	@sh -c "'$(CURDIR)/scripts/gofmtcheck.sh'"
 
-.PHONY: test testacc release vet fmt fmtcheck
+.PHONY: test testacc build release vet fmt fmtcheck
