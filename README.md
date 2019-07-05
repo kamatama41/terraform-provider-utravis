@@ -3,7 +3,7 @@
 A Terraform provider to interact with [Travis CI](https://travis-ci.com/) resources.
 
 ## Prerequisites
-- Terraform (tested on 0.11.13)
+- Terraform >= 0.12.0 (since v0.3.0)
 
 ## Installation
 This is a [Third party plugin](https://www.terraform.io/docs/configuration/providers.html#third-party-plugins), so you have to install it manually.
@@ -39,7 +39,7 @@ resource "utravis_env_var" "my-repo" {
 # Add a private key to the repository
 resource "utravis_key_pair" "my-repo" {
   slug = "myuser/my-repository"
-	value = "${file("~/.ssh/id_travis_rsa")}"
+  value = "${file("~/.ssh/id_travis_rsa")}"
 }
 ```
 
