@@ -56,9 +56,9 @@ func resourceEnvVarCreate(d *schema.ResourceData, meta interface{}) error {
 	body := createEnvVarBody(d)
 	config := meta.(*config)
 
-	config.lock()
+	config.mutex.Lock()
 	envVar, _, err := config.client.EnvVars.CreateByRepoSlug(context.Background(), slug, body)
-	config.unlock()
+	config.mutex.Unlock()
 	if err != nil {
 		return err
 	}
@@ -72,7 +72,9 @@ func resourceEnvVarRead(d *schema.ResourceData, meta interface{}) error {
 	slug := d.Get("slug").(string)
 	config := meta.(*config)
 
+	config.mutex.RLock()
 	envVar, _, err := config.client.EnvVars.FindByRepoSlug(context.Background(), slug, id)
+	config.mutex.RUnlock()
 	if err != nil {
 		e, ok := err.(*travis.ErrorResponse)
 		if ok && e.ErrorType == "not_found" {
@@ -99,9 +101,9 @@ func resourceEnvVarUpdate(d *schema.ResourceData, meta interface{}) error {
 	body := createEnvVarBody(d)
 	config := meta.(*config)
 
-	config.lock()
+	config.mutex.Lock()
 	_, _, err := config.client.EnvVars.UpdateByRepoSlug(context.Background(), slug, id, body)
-	config.unlock()
+	config.mutex.Unlock()
 	if err != nil {
 		return err
 	}
@@ -113,9 +115,9 @@ func resourceEnvVarDelete(d *schema.ResourceData, meta interface{}) error {
 	slug := d.Get("slug").(string)
 	config := meta.(*config)
 
-	config.lock()
+	config.mutex.Lock()
 	_, err := config.client.EnvVars.DeleteByRepoSlug(context.Background(), slug, id)
-	config.unlock()
+	config.mutex.Unlock()
 	if err != nil {
 		return err
 	}
