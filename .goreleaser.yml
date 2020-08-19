@@ -42,6 +42,8 @@ signs:
       # need to pass the batch flag to indicate its not interactive.
       - "--batch"
       - "--no-tty"
+      - "--passphrase={{ .Env.SIGN_KEY_PASSPHRESE }}"
+      - "--pinentry-mode=loopback"
       - "--local-user"
       - "{{ .Env.GPG_FINGERPRINT }}" # set this environment variable for your signing key
       - "--output"
