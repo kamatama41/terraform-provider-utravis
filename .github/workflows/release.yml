@@ -1,0 +1,27 @@
+name: release
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Unshallow
+        run: git fetch --prune --unshallow
+      - name: Setup Go
+        uses: actions/setup-go@v2
+      - name: Load signing key
+        run: echo "${{ secrets.PGP_SIGN_KEY }}" | gpg --import --no-tty --batch
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_FINGERPRINT: "8B51 E91B AF85 5480 01BB  2B76 324B B4DD 964B 7F0A"
+          SIGN_KEY_PASSPHRESE: ${{ secrets.SIGN_KEY_PASSPHRESE }}

@@ -15,9 +15,3 @@ script:
   - make test
   - make testacc
   - make vet
-
-deploy:
-  provider: script
-  script: ./scripts/release.sh
-  on:
-    branch: release
