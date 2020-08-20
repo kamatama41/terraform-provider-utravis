@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/hashicorp/terraform/plugin"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/kamatama41/terraform-provider-unofficial-travis/utravis"
+	"github.com/kamatama41/terraform-provider-utravis/utravis"
 )
 
 func main() {
