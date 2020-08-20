@@ -1,4 +1,4 @@
-module github.com/kamatama41/terraform-provider-unofficial-travis
+module github.com/kamatama41/terraform-provider-utravis
 
 go 1.15
 
