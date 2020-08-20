@@ -1,5 +1,4 @@
 NAME := terraform-provider-unofficial-travis
-VERSION?=$$(cat version)
 
 default: test
 
@@ -10,10 +9,7 @@ testacc: fmtcheck
 	TF_ACC=1 go test -v ./...
 
 build:
-	go build -o terraform-provider-utravis_$(VERSION)_x4
-
-release:
-	./scripts/release.sh
+	go build -o terraform-provider-utravis_v0.0.0
 
 vet:
 	@echo "go vet ."
